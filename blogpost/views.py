@@ -5,9 +5,8 @@ from blogpost.models import Blogpost
 
 
 def index(request):
-    print("hello world")
     return render_to_response('index.html', {
-        'post': Blogpost.objects.all()[:5]
+        'posts': Blogpost.objects.all()[:5]
     })
 
 

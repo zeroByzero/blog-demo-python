@@ -1,5 +1,6 @@
 # Create your models here.
 from django.db import models
+from django.urls import reverse
 
 
 class Blogpost(models.Model):
@@ -13,4 +14,5 @@ class Blogpost(models.Model):
         return '%s' % self.title
 
     def get_absolute_url(self):
-        return 'view_blog_post', None, {'slug': self.slug}
+        print(self.slug)
+        return reverse('view_blog_post', args=[self.slug])
