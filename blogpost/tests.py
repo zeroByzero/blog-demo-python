@@ -8,6 +8,7 @@ from django.utils.datetime_safe import datetime
 from blogpost.models import Blogpost
 from blogpost.views import index, view_post
 from selenium import webdriver
+from pyvirtualdisplay import Display
 
 
 '''
@@ -46,13 +47,18 @@ class HomepageTestCase(LiveServerTestCase):
             body='This is a blog',
             posted=datetime.now
         )
-
+        self.display = Display(visible=0, size=(1024, 768))
+        self.display.start()
         self.selenium = webdriver.Firefox()
         self.selenium.maximize_window()
+
+        # self.selenium = webdriver.Firefox()
+        # self.selenium.maximize_window()
         super(HomepageTestCase, self).setUp()
 
     def tearDown(self):
         self.selenium.quit()
+        self.display.stop()
         super(HomepageTestCase, self).tearDown()
 
     def test_visit_blog_post(self):
